@@ -3,6 +3,8 @@ import requests
 from .exceptions import ApiError, UserError
 from enum import Enum
 import re
+import aiohttp
+
 
 class Platform(Enum):
     steam = "steam"
@@ -11,6 +13,7 @@ class Platform(Enum):
     xbox = "xbox"
     battlenet = "battlenet"
     origin = "origin"
+
 
 def get_platform(platform: str) -> Platform:
     return {
@@ -22,10 +25,12 @@ def get_platform(platform: str) -> Platform:
         "origin": Platform.origin,
     }.get(platform)
 
+
 class CsgoProfileData:
     def __init__(self, data: dict):
         self.steamInfo: Platform = PlatformInfo(data["platformInfo"])
         self.stats: CsgoStats = CsgoStats(data["segments"][0]["stats"])
+
 
 class CsgoStatData:
     def __init__(self, data: dict):
@@ -38,6 +43,7 @@ class CsgoStatData:
         self.value = data["value"]
         self.displayValue = data["displayValue"]
         self.displayType = data["displayType"]
+
 
 class CsgoStats:
     def __init__(self, data: dict):
@@ -71,6 +77,7 @@ class CsgoStats:
         self.wlPercentage: CsgoStatData = CsgoStatData(data["wlPercentage"])
         self.headshotPct: CsgoStatData = CsgoStatData(data["headshotPct"])
 
+
 class PlatformInfo:
     def __init__(self, data: dict):
         self.Slug = get_platform(data["platformSlug"])
@@ -79,6 +86,7 @@ class PlatformInfo:
         self.UserIdentifier = data["platformUserIdentifier"]
         self.avatarUrl = data["avatarUrl"]
         self.additionalParameters = data["additionalParameters"]
+
 
 class Client:
     def __init__(self, api_key: str) -> None:
@@ -92,9 +100,11 @@ class Client:
             raise ApiError
 
         self.__api_key = api_key
+
     @property
     def api_key(self) -> str:
         return self.__api_key
+
     @api_key.setter
     def api_key(self, api_key: str) -> None:
         if (
@@ -107,6 +117,7 @@ class Client:
             raise ApiError
 
         self.__api_key = api_key
+
     def get_csgo_profile(self, identifier: str) -> CsgoProfileData:
         response = requests.get(
             url="https://public-api.tracker.gg/v2/csgo/standard/profile/steam/{0}".format(
@@ -128,3 +139,29 @@ class Client:
             raise UserError
 
         return CsgoProfileData(response.json()["data"])
+
+    async def async_get_csgo_profile(self, identifier) -> CsgoProfileData:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                "https://public-api.tracker.gg/v2/csgo/standard/profile/steam/{0}".format(
+                    identifier
+                ),
+                params={
+                    "TRN-Api-Key": self.__api_key,
+                    "Accept": "application/json",
+                    "Accept-Encoding": "gzip",
+                },
+            ) as response:
+                res = await response.json()
+                if (
+                    res.get("message")
+                    == "Invalid authentication credentials"
+                ):
+                    raise ApiError
+                if (
+                    "errors" in res
+                    and res.get("errors")[0].get("message")
+                    == "The stat collector returned the following status code: NotFound"
+                ):
+                    raise UserError
+                return CsgoProfileData(res["data"])

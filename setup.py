@@ -19,6 +19,7 @@ setuptools.setup(
     ],
     install_requires=[
         "requests",
+        "aiohttp"
     ],
     python_requires=">=3.3",
 )
