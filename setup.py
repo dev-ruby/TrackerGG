@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="TrackerGG",  # Replace with your own username
-    version="1.0.0",
+    name="TrackerGG",
+    version="1.0.1",
     author="DevRuby",
     author_email="devruby7777@gmail.com",
     description="Game Stat Library with Tracker API",
