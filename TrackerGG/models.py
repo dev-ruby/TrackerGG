@@ -44,12 +44,42 @@ def get_platform(platform: str) -> Platform:
 
 
 class CsgoProfileData:
+    """
+    Attributes
+    -----------
+    platform class:`PlatformInfo`
+        user's playform data
+    stats class:`CsgoStats`
+        user's stats
+    """
     def __init__(self, data: dict):
-        self.steamInfo: Platform = PlatformInfo(data["platformInfo"])
+        self.platform: PlatformInfo = PlatformInfo(data["platformInfo"])
         self.stats: CsgoStats = CsgoStats(data["segments"][0]["stats"])
 
 
 class CsgoStatData:
+    """
+    Attributes
+    -----------
+    rank class:`str`
+        Could be `None`
+    percentile class:`str`
+        percentage of your data
+    displayName class:`str`
+        The name of the stat on the TrackerGG website.
+    displayCategory class:`str`
+
+    category class:`str`
+
+    metadata class:`str`
+
+    value class:`float` or `int`
+        stat's value
+    displayValue class:`str`
+        The value of the stat on the TrackerGG website
+    displayType class:`str`
+        The type of the stat on the TrackerGG website
+    """
     def __init__(self, data: dict):
         self.rank = data["rank"]
         self.percentile = data["percentile"]
@@ -68,7 +98,7 @@ class CsgoStats:
         self.score: CsgoStatData = CsgoStatData(data["score"])
         self.kills: CsgoStatData = CsgoStatData(data["kills"])
         self.deaths: CsgoStatData = CsgoStatData(data["deaths"])
-        self.kd: CsgoStatData = CsgoStatData(data["kd"])
+        self.kdr: CsgoStatData = CsgoStatData(data["kd"])
         self.damage: CsgoStatData = CsgoStatData(data["damage"])
         self.headshots: CsgoStatData = CsgoStatData(data["headshots"])
         self.dominations: CsgoStatData = CsgoStatData(data["dominations"])
@@ -91,16 +121,32 @@ class CsgoStats:
         self.losses: CsgoStatData = CsgoStatData(data["losses"])
         self.roundsPlayed: CsgoStatData = CsgoStatData(data["roundsPlayed"])
         self.roundsWon: CsgoStatData = CsgoStatData(data["roundsWon"])
-        self.wlPercentage: CsgoStatData = CsgoStatData(data["wlPercentage"])
+        self.winLosePct: CsgoStatData = CsgoStatData(data["wlPercentage"])
         self.headshotPct: CsgoStatData = CsgoStatData(data["headshotPct"])
 
 
 class PlatformInfo:
+    """
+    Attributes
+    -----------
+    platform class:`Platform`
+        user's platform
+    userID class:`str` or `int`
+        user's ID in the platform
+    userHandle class:`str`
+        user's name
+    userIdentifier class:`str` or `int`
+        user's identifier
+    avatarUrl class:`str`
+        user's avatar
+    additionalParameters
+        Parameters. Could be None
+    """
     def __init__(self, data: dict):
-        self.Slug = get_platform(data["platformSlug"])
-        self.UserID = data["platformUserId"]
-        self.UserHandle = data["platformUserHandle"]
-        self.UserIdentifier = data["platformUserIdentifier"]
+        self.platform = get_platform(data["platformSlug"])
+        self.userID = data["platformUserId"]
+        self.userHandle = data["platformUserHandle"]
+        self.userIdentifier = data["platformUserIdentifier"]
         self.avatarUrl = data["avatarUrl"]
         self.additionalParameters = data["additionalParameters"]
 
@@ -157,7 +203,7 @@ class Client:
 
         return CsgoProfileData(response.json()["data"])
 
-    async def async_get_csgo_profile(self, identifier) -> CsgoProfileData:
+    async def async_get_csgo_profile(self, identifier:str) -> CsgoProfileData:
         async with aiohttp.ClientSession() as session:
             async with session.get(
                 "https://public-api.tracker.gg/v2/csgo/standard/profile/steam/{0}".format(
