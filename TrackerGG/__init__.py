@@ -19,6 +19,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 from .exceptions import ApiError
 from .exceptions import UserError
 from .models import Client
+from .models import CsgoStatData
+from .models import CsgoProfileData
+from .models import CsgoStats
+from .models import PlatformInfo
+from .models import Platform
 from .info import __version__
 from .info import __author__
 from .info import __license__
