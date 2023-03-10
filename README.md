@@ -20,6 +20,8 @@
 
 ## Use
 
+[Sign in tracker.gg and get token](https://tracker.gg/developers)
+
 **Example of getting csgo profile**
 ```py
 import TrackerGG # import this library
