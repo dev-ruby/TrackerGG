@@ -28,13 +28,13 @@ import asyncio # asyncio library for calling async function
 client = TrackerGG.Client('TOKEN') # replace 'TOKEN' with your token value.
 
 def GetSync(profile):
-    return client.get_csgo_profile(profile) # sync get
+    return client.get_csgo_profile(profile)
 
 async def GetAsync(profile):
-    return await client.async_get_csgo_profile(profile) #async get
+    return await client.async_get_csgo_profile(profile)
 
-print(GetSync("DevRuby").stats.kills.value) # print the value of kills with sync function
-print(asyncio.run(GetAsync("DevRuby")).stats.kills.value) # print the value of kill with async function
+print(GetSync("DevRuby").stats.kills.value)
+print(asyncio.run(GetAsync("DevRuby")).stats.kills.value)
 
 ```
 
