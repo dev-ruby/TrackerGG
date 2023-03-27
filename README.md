@@ -3,8 +3,8 @@
 
 
 ![license](https://img.shields.io/github/license/Dev-Ruby/TrackerGG)
-![Downloads](https://static.pepy.tech/badge/trackergg)(https://pepy.tech/project/trackergg)
-![Downloads](https://static.pepy.tech/badge/trackergg/month)(https://pepy.tech/project/trackergg)
+![Downloads](https://static.pepy.tech/badge/trackergg)
+![Downloads](https://static.pepy.tech/badge/trackergg/month)
 
 ![Version](https://img.shields.io/pypi/v/TrackerGG)
 ![Commits](https://img.shields.io/github/commit-activity/m/dev-ruby/TrackerGG)
