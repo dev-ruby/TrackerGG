@@ -15,7 +15,19 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 """
+from typing import Dict, Any, List
+from .platform import PlatformInfo
+from .user import UserInfo
+from .segment import Segment
 
-from .client import CSGOClient
 
-from .Models import CSGOProfile
+class CSGOProfile:
+    def __init__(self, data: Dict[str, Any]):
+        segments = []
+        for seg in data["segments"]:
+            segments.append(Segment(seg))
+
+        self.platform_info: PlatformInfo = PlatformInfo(data["platformInfo"])
+        self.user_info: UserInfo = UserInfo(data["userInfo"])
+        self.segments: List[Segment] = segments
+        self.expiry_date: str = data["expiryDate"]
