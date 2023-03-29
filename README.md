@@ -11,37 +11,35 @@
 
 ![Tracker](https://static1-fr.millenium.gg/articles/9/34/23/09/@/1117224-111-article_m-1.jpg)
 
-**TrackerGG is a Tracker API Client**
+**An API Wrapper for [TrackerGG API](https://tracker.gg)**
 
 ## Install
 
 ```pip install TrackerGG```
 
 
-## Use
 
-[Sign in tracker.gg and get token](https://tracker.gg/developers)
+Get API Key
 
-**Example of getting csgo profile**
+[TrackerGG Developers](https://tracker.gg/developers)
+
+
+## **Quick Example**
 ```py
-import TrackerGG # import this library
-import asyncio # asyncio library for calling async function
+import TrackerGG
+import asyncio
 
-client = TrackerGG.Client('TOKEN') # replace 'TOKEN' with your token value.
 
-def GetSync(profile):
-    return client.get_csgo_profile(profile)
+client = TrackerGG.CSGOClient("YOUR_API_KEY")
 
-async def GetAsync(profile):
-    return await client.async_get_csgo_profile(profile)
+profile = asyncio.run(client.get_profile("PLAYER_NAME OR ID"))
 
-print(GetSync("DevRuby").stats.kills.value)
-print(asyncio.run(GetAsync("DevRuby")).stats.kills.value)
+print(profile.segments[0].stats[0])
 
 ```
-
-## Exceptions
-### ApiError
-Incorrect Api Key
-### UserError
-Can't find the user
+**Output**
+```
+Name : Time Played
+Value : 1,236h
+Percentile : 84.0
+```
