@@ -17,11 +17,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 import asyncio
-import aiohttp
 import atexit
-
-from typing import ClassVar, Optional, Dict, Any
 from enum import Enum
+from typing import ClassVar, Optional, Dict, Any
+
+import aiohttp
 
 
 class Missing:

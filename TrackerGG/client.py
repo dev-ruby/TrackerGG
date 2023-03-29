@@ -17,13 +17,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 import asyncio
+import json
+
+from .Models import CSGOProfile
 from .httpclient import HTTPClient
 from .httpclient import RequestMethod
-from .httpclient import Route
 from .httpclient import ResponseData
-from .Models import CSGOProfile
-
-import json
+from .httpclient import Route
 
 
 class CSGOClient:

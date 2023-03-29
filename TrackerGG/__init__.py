@@ -16,6 +16,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 
-from .client import CSGOClient
-
 from .Models import CSGOProfile
+from .client import CSGOClient

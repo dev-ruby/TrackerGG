@@ -16,9 +16,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 from typing import Dict, Any, List
+
 from .platform import PlatformInfo
-from .user import UserInfo
 from .segment import Segment
+from .user import UserInfo
 
 
 class CSGOProfile:
