@@ -13,11 +13,13 @@
 
 **An API Wrapper for [TrackerGG API](https://tracker.gg)**
 
+
+
+## [Wiki](https://github.com/dev-ruby/TrackerGG/wiki)
+
 ## Install
 
 ```pip install TrackerGG```
-
-
 
 Get API Key
 
