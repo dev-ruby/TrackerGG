@@ -18,7 +18,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 from typing import Dict, Any, List
 
 from .platform import PlatformInfo
-from .segment import Segment
+from .segment import CSGOSegment
 from .user import UserInfo
 
 
@@ -26,9 +26,9 @@ class CSGOProfile:
     def __init__(self, data: Dict[str, Any]):
         segments = []
         for seg in data["segments"]:
-            segments.append(Segment(seg))
+            segments.append(CSGOSegment(seg))
 
         self.platform_info: PlatformInfo = PlatformInfo(data["platformInfo"])
         self.user_info: UserInfo = UserInfo(data["userInfo"])
-        self.segments: List[Segment] = segments
+        self.segments: List[CSGOSegment] = segments
         self.expiry_date: str = data["expiryDate"]
