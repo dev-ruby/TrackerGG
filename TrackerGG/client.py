@@ -37,7 +37,7 @@ class CSGOClient:
         self.api_key = api_key
         self.http_client = HTTPClient(self.loop, self.api_key)
 
-    async def get_profile(self, identifier: str):
+    async def get_profile(self, identifier: str) -> CSGOProfile:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/csgo/standard/profile/steam/{identifier}")
         )
