@@ -28,7 +28,7 @@ from .httpclient import ResponseData
 from .httpclient import Route
 
 
-class CSGOClient:
+class TrackerClient:
     api_key: str
     loop: asyncio.AbstractEventLoop
     http_client: HTTPClient
@@ -38,6 +38,11 @@ class CSGOClient:
         self.loop = asyncio.get_event_loop()
         self.api_key = api_key
         self.http_client = HTTPClient(self.loop, self.api_key)
+
+
+class CSGOClient(TrackerClient):
+    def __init__(self, api_key: str) -> None:
+        super().__init__(api_key)
 
     async def get_profile(self, identifier: str) -> CSGOProfile:
         response: ResponseData = await self.http_client.request(
