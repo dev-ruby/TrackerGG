@@ -118,5 +118,5 @@ class HTTPClient:
         try:
             if not self.session.closed:
                 asyncio.run(self.session.close())
-        except TypeError:
+        except AttributeError:
             pass
