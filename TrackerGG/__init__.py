@@ -1,6 +1,16 @@
 # -*- coding: utf-8 -*-
 
 """
+TrackerGG API Wrapper
+~~~~~~~~~~~~~~~~~~~
+
+An API Wrapper for TrackerGG API
+
+Copyright (c) 2023 DevRuby
+
+"""
+
+"""
 Copyright (c) 2023 DevRuby
 
 MIT License
