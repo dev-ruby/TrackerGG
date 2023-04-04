@@ -50,16 +50,13 @@ class CSGOClient:
 
         return CSGOProfile(json_data["data"])
 
-    async def get_map_segment(
-            self, identifier: str
-    ) -> List[CSGOMapSegment]:
+    async def get_map_segment(self, identifier: str) -> List[CSGOMapSegment]:
         response: ResponseData = await self.http_client.request(
             Route(
                 RequestMethod.GET,
                 f"/csgo/standard/profile/steam/{identifier}/segments/map",
             )
         )
-
 
         assert response.status == 200, "HTTP Response Status Code is not 200"
 

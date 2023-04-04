@@ -20,7 +20,9 @@ from Models import CSGOMapSegment
 from typing import List, Union
 
 
-def query_map_by_key(maps: List[CSGOMapSegment], key: str) -> Union[CSGOMapSegment, int]:
+def query_map_by_key(
+    maps: List[CSGOMapSegment], key: str
+) -> Union[CSGOMapSegment, int]:
     for _map in maps:
         if _map.attributes["key"] == key:
             return _map
