@@ -18,8 +18,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import asyncio
 import json
+from typing import List
 
 from .Models import CSGOProfile
+from .Models import CSGOMapSegment
 from .httpclient import HTTPClient
 from .httpclient import RequestMethod
 from .httpclient import ResponseData
@@ -47,3 +49,25 @@ class CSGOClient:
         json_data: dict = json.loads(response.response_data)
 
         return CSGOProfile(json_data["data"])
+
+    async def get_map_segment(
+            self, identifier: str
+    ) -> List[CSGOMapSegment]:
+        response: ResponseData = await self.http_client.request(
+            Route(
+                RequestMethod.GET,
+                f"/csgo/standard/profile/steam/{identifier}/segments/map",
+            )
+        )
+
+
+        assert response.status == 200, "HTTP Response Status Code is not 200"
+
+        json_data: dict = json.loads(response.response_data)
+
+        segments = []
+
+        for segment in json_data["data"]:
+            segments.append(CSGOMapSegment(segment))
+
+        return segments

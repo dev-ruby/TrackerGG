@@ -17,4 +17,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from .Models import CSGOProfile
+from .Models import CSGOMapSegment
 from .client import CSGOClient
