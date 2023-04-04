@@ -16,7 +16,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 
-from Models import CSGOMapSegment
+from .Models import CSGOMapSegment
 from typing import List, Union
 
 
