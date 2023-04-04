@@ -16,7 +16,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 
-from .Models import CSGOProfile
-from .Models import CSGOMapSegment
-from .client import CSGOClient
-from . import utils
+from Models import CSGOMapSegment
+from typing import List, Union
+
+
+def query_map_by_key(maps: List[CSGOMapSegment], key: str) -> Union[CSGOMapSegment, int]:
+    for _map in maps:
+        if _map.attributes["key"] == key:
+            return _map
+    return -1
