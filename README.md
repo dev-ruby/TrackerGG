@@ -34,7 +34,9 @@ import asyncio
 
 client = TrackerGG.CSGOClient("YOUR_API_KEY")
 
-profile = asyncio.run(client.get_profile("PLAYER_NAME OR ID"))
+loop = asyncio.get_event_loop()
+
+profile = loop.run_until_complete(client.get_profile("PLAYER_NAME OR ID"))
 
 print(profile.segments[0].stats.time_played)
 
