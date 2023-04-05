@@ -68,16 +68,23 @@ class CSGOMapSegment:
         self.expiry_date: str = data["expiryDate"]
         self.stats: CSGOMapStats = CSGOMapStats(data["stats"])
 
+class CSGOSegment:
+    def __init__(self, data: Dict[str, Union[str, dict]]):
+        self.type: str = data["type"]
+        self.attributes: dict = data["attributes"]
+        self.metadata: dict = data["metadata"]
+        self.expiry_date: str = data["expiryDate"]
+        self.stats: CSGOStats = CSGOStats(data["stats"])
 
 class CSGOProfile:
     def __init__(self, data: Dict[str, Any]):
         segments = []
         for seg in data["segments"]:
-            segments.append(CSGOMapSegment(seg))
+            segments.append(CSGOSegment(seg))
 
         self.platform_info: PlatformInfo = PlatformInfo(data["platformInfo"])
         self.user_info: UserInfo = UserInfo(data["userInfo"])
-        self.segments: List[CSGOMapSegment] = segments
+        self.segments: List[CSGOSegment] = segments
         self.expiry_date: str = data["expiryDate"]
 
 
