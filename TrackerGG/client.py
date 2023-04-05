@@ -63,7 +63,9 @@ class CSGOClient(TrackerClient):
             )
         )
 
-        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d"%response.status
+        assert response.status == 200, (
+            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        )
 
         json_data: dict = json.loads(response.response_data)
 

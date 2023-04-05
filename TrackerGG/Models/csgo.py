@@ -68,6 +68,7 @@ class CSGOMapSegment:
         self.expiry_date: str = data["expiryDate"]
         self.stats: CSGOMapStats = CSGOMapStats(data["stats"])
 
+
 class CSGOSegment:
     def __init__(self, data: Dict[str, Union[str, dict]]):
         self.type: str = data["type"]
@@ -75,6 +76,7 @@ class CSGOSegment:
         self.metadata: dict = data["metadata"]
         self.expiry_date: str = data["expiryDate"]
         self.stats: CSGOStats = CSGOStats(data["stats"])
+
 
 class CSGOProfile:
     def __init__(self, data: Dict[str, Any]):
