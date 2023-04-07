@@ -49,7 +49,9 @@ class CSGOClient(TrackerClient):
             Route(RequestMethod.GET, f"/csgo/standard/profile/steam/{identifier}")
         )
 
-        assert response.status == 200, "HTTP Response Status Code is not 200"
+        assert response.status == 200, (
+                "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        )
 
         json_data: dict = json.loads(response.response_data)
 
