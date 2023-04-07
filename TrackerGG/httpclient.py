@@ -89,26 +89,20 @@ class HTTPClient:
     async def request(
         self, route: Route, headers: Optional[Dict[str, str]] = None
     ) -> ResponseData:
-        if headers:
-            headers["User-Agent"] = self.USER_AGENT
-            headers["Accept"] = "application/json"
-            headers["Accept-Encoding"] = "gzip"
-            headers["TRN-Api-Key"] = self.api_key
-            headers["Host"] = "public-api.tracker.gg"
-            headers["Connection"] = "keep-alive"
-            headers["TE"] = "trailers"
-            headers["Upgrade-Insecure-Requests"] = "1"
-        else:
-            headers = {
-                "User-Agent": self.USER_AGENT,
-                "Accept": "application/json",
-                "Accept-Encoding": "gzip",
-                "TRN-Api-Key": self.api_key,
-                "Host": "public-api.tracker.gg",
-                "Connection": "keep-alive",
-                "TE": "trailers",
-                "Upgrade-Insecure-Requests": "1",
-            }
+        if not headers:
+            headers = {}
+        default_header = {
+            "User-Agent": self.USER_AGENT,
+            "Accept": "application/json",
+            "Accept-Encoding": "gzip",
+            "TRN-Api-Key": self.api_key,
+            "Host": "public-api.tracker.gg",
+            "Connection": "keep-alive",
+            "TE": "trailers",
+            "Upgrade-Insecure-Requests": "1",
+        }
+
+        headers.update(default_header)
 
         if self.session == MISSING:
             self.session = aiohttp.ClientSession()
