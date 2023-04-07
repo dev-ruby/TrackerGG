@@ -82,6 +82,7 @@ class HTTPClient:
         self.loop: asyncio.AbstractEventLoop = loop
         self.session: aiohttp.ClientSession = MISSING
         self.api_key: str = api_key
+        self.lock: asyncio.Lock = asyncio.Lock()
 
         atexit.register(self.close)
 
@@ -112,12 +113,13 @@ class HTTPClient:
         if self.session == MISSING:
             self.session = aiohttp.ClientSession()
 
-        async with self.session.request(
-            method=route.method.name, url=route.url, headers=headers
-        ) as response:
-            status: int = response.status
-            text: str = await response.text(encoding="utf-8")
-            return ResponseData(text, status)
+        async with self.lock:
+            async with self.session.request(
+                method=route.method.name, url=route.url, headers=headers
+            ) as response:
+                status: int = response.status
+                text: str = await response.text(encoding="utf-8")
+                return ResponseData(text, status)
 
     def close(self) -> None:
         try:
