@@ -18,10 +18,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import asyncio
 import json
-from typing import List
+from typing import List, Union
 
 from .Models import CSGOProfile
 from .Models import CSGOMapSegment
+from .Models import CSGOQueryData
 from .httpclient import HTTPClient
 from .httpclient import RequestMethod
 from .httpclient import ResponseData
@@ -77,3 +78,23 @@ class CSGOClient(TrackerClient):
             segments.append(CSGOMapSegment(segment))
 
         return segments
+
+    async def search_profile(self, query: str) -> Union[None, List[CSGOQueryData]]:
+        response: ResponseData = await self.http_client.request(
+            Route(RequestMethod.GET, f"/csgo/standard/search", params={"platform":"steam", "query":query})
+        )
+
+        assert response.status == 200, (
+                "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        )
+
+        json_data: dict = json.loads(response.response_data)
+
+        query_data = None
+
+        if json_data["data"]:
+            query_data = []
+            for dat in json_data["data"]:
+                query_data.append(CSGOQueryData(dat))
+
+        return query_data

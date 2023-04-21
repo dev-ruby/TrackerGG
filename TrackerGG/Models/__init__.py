@@ -18,3 +18,4 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 from .csgo import CSGOProfile
 from .csgo import CSGOMapSegment
+from .csgo import CSGOQueryData

@@ -16,7 +16,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 from enum import Enum
-from typing import Dict, Any, List, Union
+from typing import Dict, Any, List, Union, Optional
 
 from .platform import PlatformInfo
 from .segment import Stat
@@ -96,3 +96,14 @@ class CSGOMap:
         self.metadata: dict = data["metadata"]
         self.expiry_date: str = data["expiryDate"]
         self.stats: CSGOMapStats = CSGOMapStats(data["stats"])
+
+
+class CSGOQueryData:
+    def __init__(self, data: Dict[str, Optional[Union[str, int]]]):
+        self.platform_id = int(data["platformId"])
+        self.platform_user_id: Union[str, int] = data["platformUserId"]
+        self.platform_user_handle: str = data["platformUserHandle"]
+        self.platform_user_identifier: Union[str, int] = data["platformUserIdentifier"]
+        self.avatar_url: str = data["avatarUrl"]
+        self.additional_parameters: Any = data["additionalParameters"]
+        self.status: Any = data["status"]
