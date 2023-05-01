@@ -37,6 +37,7 @@ class TrackerClient:
 
     :param api_key: :class:`str` Tracker API Key.
     """
+
     api_key: str
     loop: asyncio.AbstractEventLoop
     http_client: HTTPClient
@@ -59,6 +60,7 @@ class CSGOClient(TrackerClient):
 
     :param api_key: :class:`str` Tracker API Key.
     """
+
     def __init__(self, api_key: str) -> None:
         super().__init__(api_key)
 
