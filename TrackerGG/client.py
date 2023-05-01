@@ -31,6 +31,12 @@ from .httpclient import Route
 
 
 class TrackerClient:
+    """
+    Parent class of CSGOClient, ApexClient, etc.
+    This class contains Tracker API Key, Event Loop, HTTP Client for interacting with TrackerAPI
+
+    :param api_key: :class:`str` Tracker API Key.
+    """
     api_key: str
     loop: asyncio.AbstractEventLoop
     http_client: HTTPClient
@@ -43,10 +49,23 @@ class TrackerClient:
 
 
 class CSGOClient(TrackerClient):
+    """
+    A class for interact with Tracker CSGO API
+    This class contains Tracker API Key, Event Loop, HTTP Client for interacting with TrackerAPI
+
+    :param api_key: :class:`str` Tracker API Key.
+    """
     def __init__(self, api_key: str) -> None:
         super().__init__(api_key)
 
     async def get_profile(self, identifier: str) -> CSGOProfile:
+        """
+        Returns career stats for an CSGO player.
+
+        :param identifier: :class:`str`
+        :return: :class:`CSGOProfile`
+        :raise AssertionError: If the response code is not 200
+        """
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/csgo/standard/profile/steam/{identifier}")
         )
@@ -60,6 +79,13 @@ class CSGOClient(TrackerClient):
         return CSGOProfile(json_data["data"])
 
     async def get_map_segment(self, identifier: str) -> List[CSGOMapSegment]:
+        """
+        Returns stats of the map for a CSGO player.
+
+        :param identifier: :class:`str`
+        :return: List[:class:`CSGOMapSegment`]
+        :raise AssertionError: If the response code is not 200
+        """
         response: ResponseData = await self.http_client.request(
             Route(
                 RequestMethod.GET,
@@ -81,6 +107,13 @@ class CSGOClient(TrackerClient):
         return segments
 
     async def get_weapon_segment(self, identifier: str) -> List[CSGOWeaponSegment]:
+        """
+        Returns stats of the weapon for a CSGO player.
+
+        :param identifier: :class:`str`
+        :return: List[:class:`CSGOWeaponSegment`]
+        :raise AssertionError: If the response code is not 200
+        """
         response: ResponseData = await self.http_client.request(
             Route(
                 RequestMethod.GET,
@@ -102,6 +135,13 @@ class CSGOClient(TrackerClient):
         return segments
 
     async def search_profile(self, query: str) -> Union[None, List[CSGOQueryData]]:
+        """
+        Returns search data for a CSGO player using a unique identifier
+
+        :param query: :class:`str`
+        :return: Union[None, List[:class:`CSGOQueryData`]]
+        :raise AssertionError: If the response code is not 200
+        """
         response: ResponseData = await self.http_client.request(
             Route(
                 RequestMethod.GET,

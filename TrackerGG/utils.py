@@ -25,6 +25,14 @@ from typing import List, Union
 def query_map_by_key(
     maps: List[CSGOMapSegment], key: str
 ) -> Union[CSGOMapSegment, int]:
+    """
+    Returns CSGOMapSegment that matches key
+    Returns -1 if there is no matching CSGOMapSegment Object
+
+    :param maps: List[:class:`CSGOMapSegment`]
+    :param key: :class:`str`
+    :return: Union[:class:`CSGOMapSegment`, :class:`int`]
+    """
     for _map in maps:
         if _map.attributes["key"] == key:
             return _map
@@ -34,6 +42,14 @@ def query_map_by_key(
 def query_weapon(
     weapons: List[CSGOWeaponSegment], key: CSGOWeapon
 ) -> Union[CSGOWeaponSegment, int]:
+    """
+    Returns CSGOWeaponSegment that matches key
+    Returns -1 if there is no matching CSGOWeaponSegment Object
+
+    :param weapons: List[:class:`CSGOWeaponSegment`]
+    :param key: :class:`CSGOWeapon`
+    :return: Union[:class:`CSGOWeaponSegment`, :class:`int`]
+    """
     for _weapon in weapons:
         if _weapon.attributes["key"] == key.value:
             return _weapon
