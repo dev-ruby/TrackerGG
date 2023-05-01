@@ -19,6 +19,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 import asyncio
 import json
 from typing import List, Union
+import sys
 
 from .Models import CSGOProfile
 from .Models import CSGOMapSegment
@@ -42,7 +43,11 @@ class TrackerClient:
     http_client: HTTPClient
 
     def __init__(self, api_key: str) -> None:
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        try:
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        except AttributeError:
+            pass
+
         self.loop = asyncio.get_event_loop()
         self.api_key = api_key
         self.http_client = HTTPClient(self.loop, self.api_key)
