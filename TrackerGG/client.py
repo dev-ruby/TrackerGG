@@ -19,7 +19,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 import asyncio
 import json
 from typing import List, Union
-import sys
 
 from .Models import CSGOProfile
 from .Models import CSGOMapSegment
