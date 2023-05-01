@@ -33,7 +33,7 @@ from .httpclient import Route
 class TrackerClient:
     """
     Parent class of CSGOClient, ApexClient, etc.
-    This class contains Tracker API Key, Event Loop, HTTP Client for interacting with TrackerAPI
+    This class contains the Tracker API Key, Event Loop, and HTTP Client for interacting with TrackerAPI.
 
     :param api_key: :class:`str` Tracker API Key.
     """
@@ -55,8 +55,8 @@ class TrackerClient:
 
 class CSGOClient(TrackerClient):
     """
-    A class for interact with Tracker CSGO API
-    This class contains Tracker API Key, Event Loop, HTTP Client for interacting with TrackerAPI
+    A class for interacting with the Tracker CSGO API
+    This class contains the Tracker API Key, Event Loop, and HTTP Client for interacting with TrackerAPI.
 
     :param api_key: :class:`str` Tracker API Key.
     """
@@ -86,7 +86,7 @@ class CSGOClient(TrackerClient):
 
     async def get_map_segment(self, identifier: str) -> List[CSGOMapSegment]:
         """
-        Returns stats of the map for a CSGO player.
+        Returns the stats of the map for a CSGO player.
 
         :param identifier: :class:`str`
         :return: List[:class:`CSGOMapSegment`]
@@ -114,7 +114,7 @@ class CSGOClient(TrackerClient):
 
     async def get_weapon_segment(self, identifier: str) -> List[CSGOWeaponSegment]:
         """
-        Returns stats of the weapon for a CSGO player.
+        Returns the stats of the weapon for a CSGO player.
 
         :param identifier: :class:`str`
         :return: List[:class:`CSGOWeaponSegment`]
@@ -142,7 +142,7 @@ class CSGOClient(TrackerClient):
 
     async def search_profile(self, query: str) -> Union[None, List[CSGOQueryData]]:
         """
-        Returns search data for a CSGO player using a unique identifier
+        Returns search data for a CSGO player using a unique identifier.
 
         :param query: :class:`str`
         :return: Union[None, List[:class:`CSGOQueryData`]]

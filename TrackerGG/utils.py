@@ -26,8 +26,8 @@ def query_map_by_key(
     maps: List[CSGOMapSegment], key: str
 ) -> Union[CSGOMapSegment, int]:
     """
-    Returns CSGOMapSegment that matches key
-    Returns -1 if there is no matching CSGOMapSegment Object
+    Returns a CSGOMapSegment that matches key.
+    Returns -1 if there is no matching CSGOMapSegment Object.
 
     :param maps: List[:class:`CSGOMapSegment`]
     :param key: :class:`str`
@@ -43,8 +43,8 @@ def query_weapon(
     weapons: List[CSGOWeaponSegment], key: CSGOWeapon
 ) -> Union[CSGOWeaponSegment, int]:
     """
-    Returns CSGOWeaponSegment that matches key
-    Returns -1 if there is no matching CSGOWeaponSegment Object
+    Returns a CSGO weapon segment that matches key.
+    Returns -1 if there is no matching CSGOWeaponSegment Object.
 
     :param weapons: List[:class:`CSGOWeaponSegment`]
     :param key: :class:`CSGOWeapon`
