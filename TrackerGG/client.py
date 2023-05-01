@@ -37,12 +37,17 @@ class TrackerClient:
 
     :param api_key: :class:`str` Tracker API Key.
     """
+
     api_key: str
     loop: asyncio.AbstractEventLoop
     http_client: HTTPClient
 
     def __init__(self, api_key: str) -> None:
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        try:
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        except AttributeError:
+            pass
+
         self.loop = asyncio.get_event_loop()
         self.api_key = api_key
         self.http_client = HTTPClient(self.loop, self.api_key)
@@ -55,6 +60,7 @@ class CSGOClient(TrackerClient):
 
     :param api_key: :class:`str` Tracker API Key.
     """
+
     def __init__(self, api_key: str) -> None:
         super().__init__(api_key)
 
