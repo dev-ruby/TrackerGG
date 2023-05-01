@@ -28,5 +28,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 from .Models import CSGOProfile
 from .Models import CSGOMapSegment
+from .Models import CSGOWeaponSegment
+from .Models import CSGOWeapon
 from .client import CSGOClient
 from . import utils
+from .Models import Platform

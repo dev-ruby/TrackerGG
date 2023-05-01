@@ -22,6 +22,7 @@ from typing import List, Union
 
 from .Models import CSGOProfile
 from .Models import CSGOMapSegment
+from .Models import CSGOWeaponSegment
 from .Models import CSGOQueryData
 from .httpclient import HTTPClient
 from .httpclient import RequestMethod
@@ -76,6 +77,27 @@ class CSGOClient(TrackerClient):
 
         for segment in json_data["data"]:
             segments.append(CSGOMapSegment(segment))
+
+        return segments
+
+    async def get_weapon_segment(self, identifier: str) -> List[CSGOWeaponSegment]:
+        response: ResponseData = await self.http_client.request(
+            Route(
+                RequestMethod.GET,
+                f"/csgo/standard/profile/steam/{identifier}/segments/weapon",
+            )
+        )
+
+        assert response.status == 200, (
+            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        )
+
+        json_data: dict = json.loads(response.response_data)
+
+        segments = []
+
+        for segment in json_data["data"]:
+            segments.append(CSGOWeaponSegment(segment))
 
         return segments
 

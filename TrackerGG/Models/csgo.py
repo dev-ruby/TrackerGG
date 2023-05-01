@@ -60,6 +60,14 @@ class CSGOMapStats:
         self.wins: Stat = Stat(data["wins"])
 
 
+class CSGOWeaponStats:
+    def __init__(self, data: Dict[str, dict]):
+        self.kills: Stat = Stat(data["kills"])
+        self.shots_fired: Stat = Stat(data["shotsFired"])
+        self.shots_hit: Stat = Stat(data["shotsHit"])
+        self.shots_accuracy: Stat = Stat(data["shotsAccuracy"])
+
+
 class CSGOMapSegment:
     def __init__(self, data: Dict[str, Union[str, dict]]):
         self.type: str = data["type"]
@@ -67,6 +75,15 @@ class CSGOMapSegment:
         self.metadata: dict = data["metadata"]
         self.expiry_date: str = data["expiryDate"]
         self.stats: CSGOMapStats = CSGOMapStats(data["stats"])
+
+
+class CSGOWeaponSegment:
+    def __init__(self, data: Dict[str, Union[str, dict]]):
+        self.type: str = data["type"]
+        self.attributes: dict = data["attributes"]
+        self.metadata = data["metadata"]
+        self.expiry_date: str = data["expiryDate"]
+        self.stats: CSGOWeaponStats = CSGOWeaponStats(data["stats"])
 
 
 class CSGOSegment:
@@ -107,3 +124,36 @@ class CSGOQueryData:
         self.avatar_url: str = data["avatarUrl"]
         self.additional_parameters: Any = data["additionalParameters"]
         self.status: Any = data["status"]
+
+
+class CSGOWeapon(Enum):
+    AK47 = "ak47"
+    AUG = "aug"
+    AWP = "awp"
+    BIZON = "bizon"
+    DEAGLE = "deagle"
+    DUALS = "elite"
+    FAMAS = "famas"
+    FIVESEVEN = "fiveseven"
+    G3SG1 = "g3sg1"
+    GALIL = "galilar"
+    GLOCK = "glock"
+    P2000 = "hkp2000"
+    M249 = "m249"
+    M4A1 = "m4a1"
+    MAC10 = "mac10"
+    MAG7 = "mag7"
+    MP7 = "mp7"
+    MP9 = "mp9"
+    NEGEV = "negev"
+    NOVA = "nova"
+    P250 = "p250"
+    P90 = "p90"
+    SAWED_OFF = "sawedoff"
+    SCAR = "scar20"
+    SG553 = "sg556"
+    SSG08 = "ssg08"
+    ZEUS = "taser"
+    TEC9 = "tec9"
+    UMP45 = "ump45"
+    XM1014 = "xm1014"

@@ -17,6 +17,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from .Models import CSGOMapSegment
+from .Models import CSGOWeaponSegment
+from .Models import CSGOWeapon
 from typing import List, Union
 
 
@@ -26,4 +28,13 @@ def query_map_by_key(
     for _map in maps:
         if _map.attributes["key"] == key:
             return _map
+    return -1
+
+
+def query_weapon(
+    weapons: List[CSGOWeaponSegment], key: CSGOWeapon
+) -> Union[CSGOWeaponSegment, int]:
+    for _weapon in weapons:
+        if _weapon.attributes["key"] == key.value:
+            return _weapon
     return -1

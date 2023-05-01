@@ -19,3 +19,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 from .csgo import CSGOProfile
 from .csgo import CSGOMapSegment
 from .csgo import CSGOQueryData
+from .csgo import CSGOWeaponSegment
+from .csgo import CSGOWeapon
+from .platform import Platform
