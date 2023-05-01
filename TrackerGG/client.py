@@ -51,7 +51,7 @@ class CSGOClient(TrackerClient):
         )
 
         assert response.status == 200, (
-                "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         )
 
         json_data: dict = json.loads(response.response_data)
@@ -81,11 +81,15 @@ class CSGOClient(TrackerClient):
 
     async def search_profile(self, query: str) -> Union[None, List[CSGOQueryData]]:
         response: ResponseData = await self.http_client.request(
-            Route(RequestMethod.GET, f"/csgo/standard/search", params={"platform":"steam", "query":query})
+            Route(
+                RequestMethod.GET,
+                f"/csgo/standard/search",
+                params={"platform": "steam", "query": query},
+            )
         )
 
         assert response.status == 200, (
-                "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         )
 
         json_data: dict = json.loads(response.response_data)
