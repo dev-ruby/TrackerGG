@@ -5,7 +5,7 @@ with open("README.md", "r") as fs:
 
 setuptools.setup(
     name="TrackerGG",
-    version="2.4.1",
+    version="2.5.0",
     author="DevRuby",
     author_email="hiveruby@gmail.com",
     description="TrackerGG API Wrapper Library",
