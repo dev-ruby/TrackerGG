@@ -21,6 +21,8 @@ from typing import Dict, Union, Any, Optional
 
 class Stat:
     def __init__(self, data: Dict[str, Union[int, float, str, dict, None]]):
+        if data is None:
+            return
         self.rank: Optional[int] = data["rank"]
         self.percentile: Optional[float] = data["percentile"]
         self.description: Optional[str] = data["description"]

@@ -21,4 +21,8 @@ from .csgo import CSGOMapSegment
 from .csgo import CSGOQueryData
 from .csgo import CSGOWeaponSegment
 from .csgo import CSGOWeapon
+
+from .apex import ApexProfile
+from .apex import ApexQueryData
+
 from .platform import Platform

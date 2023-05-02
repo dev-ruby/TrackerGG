@@ -26,6 +26,7 @@ class Platform(Enum):
     xbl = "xbl"
     psn = "psn"
     uplay = "uplay"
+    battlenet = "battlenet"
 
 
 class PlatformInfo:

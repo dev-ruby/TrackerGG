@@ -25,7 +25,7 @@ class SocialAccount:
         self.platform_user_id: Union[str, int] = data["platformUserId"]
         self.platform_user_handle: str = data["platformUserHandle"]
         self.platform_user_identifier: Union[str, int] = data["platformUserIdentifier"]
-        self.avatar_url: str = data["avatarUrl"]
+        self.avatar_url: Optional[str] = data.get("avatarUrl")
         self.additional_parameters: Any = data["additionalParameters"]
 
 

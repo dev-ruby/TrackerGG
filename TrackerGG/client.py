@@ -24,6 +24,10 @@ from .Models import CSGOProfile
 from .Models import CSGOMapSegment
 from .Models import CSGOWeaponSegment
 from .Models import CSGOQueryData
+from .Models import ApexProfile
+from .Models import ApexQueryData
+from .Models import Platform
+
 from .httpclient import HTTPClient
 from .httpclient import RequestMethod
 from .httpclient import ResponseData
@@ -168,5 +172,68 @@ class CSGOClient(TrackerClient):
             query_data = []
             for dat in json_data["data"]:
                 query_data.append(CSGOQueryData(dat))
+
+        return query_data
+
+
+class ApexClient(TrackerClient):
+    def __init__(self, api_key: str) -> None:
+        super().__init__(api_key)
+
+    async def get_profile(self, identifier: str, platform: Platform) -> ApexProfile:
+        """
+        Returns career stats for an Apex player.
+
+        :param platform: :class:`Platform`
+        :param identifier: :class:`str`
+        :return: :class:`ApexProfile`
+        :raise AssertionError: If the response code is not 200
+        """
+        response: ResponseData = await self.http_client.request(
+            Route(
+                RequestMethod.GET,
+                f"/apex/standard/profile/{platform.value}/{identifier}",
+            )
+        )
+
+        assert response.status == 200, (
+            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        )
+
+        json_data: dict = json.loads(response.response_data)
+
+        return ApexProfile(json_data["data"])
+
+    async def search_profile(
+        self, query: str, platform: Platform
+    ) -> Union[None, List[ApexQueryData]]:
+        """
+        Returns search data for an Apex player using a unique identifier.
+
+        :param platform: :class:`Platform`
+        :param query: :class:`str`
+        :return: Union[None, List[:class:`ApexQueryData`]]
+        :raise AssertionError: If the response code is not 200
+        """
+        response: ResponseData = await self.http_client.request(
+            Route(
+                RequestMethod.GET,
+                f"/apex/standard/search",
+                params={"platform": platform.value, "query": query},
+            )
+        )
+
+        assert response.status == 200, (
+            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        )
+
+        json_data: dict = json.loads(response.response_data)
+
+        query_data = None
+
+        if json_data["data"]:
+            query_data = []
+            for dat in json_data["data"]:
+                query_data.append(ApexQueryData(dat))
 
         return query_data
