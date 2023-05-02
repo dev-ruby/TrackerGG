@@ -26,10 +26,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 
+from .Models import Platform
 from .Models import CSGOProfile
 from .Models import CSGOMapSegment
 from .Models import CSGOWeaponSegment
 from .Models import CSGOWeapon
+from .Models import ApexProfile
+
 from .client import CSGOClient
+from .client import ApexClient
+
 from . import utils
-from .Models import Platform
