@@ -2,20 +2,23 @@
 
 
 
-![license](https://img.shields.io/github/license/Dev-Ruby/TrackerGG)
-![Downloads](https://static.pepy.tech/badge/trackergg)
-![Downloads](https://static.pepy.tech/badge/trackergg/month)
+
+[![Downloads](https://static.pepy.tech/personalized-badge/trackergg?period=total&units=none&left_color=grey&right_color=blue&left_text=Pypi%20Downloads)](https://pepy.tech/project/trackergg)
+
+[![Downloads](https://static.pepy.tech/personalized-badge/trackergg?period=month&units=none&left_color=grey&right_color=blue&left_text=Pypi%20Downloads/Month)](https://pepy.tech/project/trackergg)
 
 ![Version](https://img.shields.io/pypi/v/TrackerGG)
 ![Commits](https://img.shields.io/github/commit-activity/m/dev-ruby/TrackerGG)
+![license](https://img.shields.io/github/license/Dev-Ruby/TrackerGG)
+
 
 ![Tracker](https://static1-fr.millenium.gg/articles/9/34/23/09/@/1117224-111-article_m-1.jpg)
 
-**An API Wrapper for [TrackerGG API](https://tracker.gg)**
+**An Unofficual API Wrapper for [TrackerGG API](https://tracker.gg)**
 
 
 
-## [Wiki](https://github.com/dev-ruby/TrackerGG/wiki)
+### [Wiki](https://github.com/dev-ruby/TrackerGG/wiki)
 
 ## Install
 
