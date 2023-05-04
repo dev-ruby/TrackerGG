@@ -13,7 +13,7 @@
 
 ![Tracker](https://static1-fr.millenium.gg/articles/9/34/23/09/@/1117224-111-article_m-1.jpg)
 
-**An Unofficual API Wrapper for [TrackerGG API](https://tracker.gg)**
+**An Unofficual API Wrapper for [TrackerGG API](https://tracker.gg/developers)**
 
 
 
