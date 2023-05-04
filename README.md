@@ -1,10 +1,9 @@
+<div align="center">
+  
 # TrackerGG
 
 
-
-
 [![Downloads](https://static.pepy.tech/personalized-badge/trackergg?period=total&units=none&left_color=grey&right_color=blue&left_text=Pypi%20Downloads)](https://pepy.tech/project/trackergg)
-
 [![Downloads](https://static.pepy.tech/personalized-badge/trackergg?period=month&units=none&left_color=grey&right_color=blue&left_text=Pypi%20Downloads/Month)](https://pepy.tech/project/trackergg)
 
 ![Version](https://img.shields.io/pypi/v/TrackerGG)
@@ -18,7 +17,12 @@
 
 
 
-### [Wiki](https://github.com/dev-ruby/TrackerGG/wiki)
+# [Wiki](https://github.com/dev-ruby/TrackerGG/wiki)
+  
+</br>
+</br>
+  
+</div>
 
 ## Install
 
