@@ -27,3 +27,7 @@ class CSGOTest(unittest.TestCase):
     def test_search_profile(self):
         for p in csgo_profile_list:
             print(loop.run_until_complete(csgo_client.search_profile(p)))
+
+            
+if __name__ == '__main__':
+    unittest.main()
