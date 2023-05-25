@@ -18,20 +18,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import asyncio
 import json
-from typing import List, Union
+from typing import List, Union, Optional
 
-from .Models import CSGOProfile
-from .Models import CSGOMapSegment
-from .Models import CSGOWeaponSegment
-from .Models import CSGOQueryData
+from .HTTPClients import *
 from .Models import ApexProfile
 from .Models import ApexQueryData
+from .Models import CSGOMapSegment
+from .Models import CSGOProfile
+from .Models import CSGOQueryData
+from .Models import CSGOWeaponSegment
 from .Models import Platform
-
-from .httpclient import HTTPClient
-from .httpclient import RequestMethod
-from .httpclient import ResponseData
-from .httpclient import Route
 
 
 class TrackerClient:
@@ -44,9 +40,9 @@ class TrackerClient:
 
     api_key: str
     loop: asyncio.AbstractEventLoop
-    http_client: HTTPClient
+    http_client: AbstractHTTPClient
 
-    def __init__(self, api_key: str) -> None:
+    def __init__(self, api_key: str, http_client: Optional[HTTPClientLibrary] = None) -> None:
         try:
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         except AttributeError:
@@ -54,7 +50,7 @@ class TrackerClient:
 
         self.loop = asyncio.get_event_loop()
         self.api_key = api_key
-        self.http_client = HTTPClient(self.loop, self.api_key)
+        self.http_client = get_http_client(self.loop, self.api_key)
 
 
 class CSGOClient(TrackerClient):

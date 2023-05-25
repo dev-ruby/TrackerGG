@@ -37,3 +37,21 @@ from .client import CSGOClient
 from .client import ApexClient
 
 from . import utils
+
+
+count = 0
+
+try:
+    import aiohttp
+    count += 1
+except ImportError:
+    pass
+
+try:
+    import httpx
+    count += 1
+except ImportError:
+    pass
+
+if count == 0:
+    raise ImportError("\nAt least one of aiohttp or httpx libraries is required\nTry `pip install aiohttp` or `pip install httpx`")
