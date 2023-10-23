@@ -50,7 +50,7 @@ class TrackerClient:
 
         self.loop = asyncio.get_event_loop()
         self.api_key = api_key
-        self.http_client = get_http_client(self.loop, self.api_key)
+        self.http_client = get_http_client(self.loop, self.api_key, http_client)
 
 
 class CSGOClient(TrackerClient):
@@ -61,8 +61,8 @@ class CSGOClient(TrackerClient):
     :param api_key: :class:`str` Tracker API Key.
     """
 
-    def __init__(self, api_key: str) -> None:
-        super().__init__(api_key)
+    def __init__(self, api_key: str, http_client: Optional[HTTPClientLibrary] = None) -> None:
+        super().__init__(api_key, http_client)
 
     async def get_profile(self, identifier: str) -> CSGOProfile:
         """
@@ -173,8 +173,8 @@ class CSGOClient(TrackerClient):
 
 
 class ApexClient(TrackerClient):
-    def __init__(self, api_key: str) -> None:
-        super().__init__(api_key)
+    def __init__(self, api_key: str, http_client: Optional[HTTPClientLibrary] = None) -> None:
+        super().__init__(api_key, http_client)
 
     async def get_profile(self, identifier: str, platform: Platform) -> ApexProfile:
         """
