@@ -15,12 +15,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import asyncio
 import atexit
-from typing import ClassVar, Optional, Union, Dict
+from typing import *
 
 import aiohttp
 
 from .abstract_http_client import AbstractHTTPClient
 from .httpclient import MISSING, ResponseData, Route
+
+__all__ = ["AiohttpHTTPClient"]
 
 
 class AiohttpHTTPClient(AbstractHTTPClient):

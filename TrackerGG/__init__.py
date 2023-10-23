@@ -26,32 +26,30 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 
-from .Models import Platform
-from .Models import CSGOProfile
-from .Models import CSGOMapSegment
-from .Models import CSGOWeaponSegment
-from .Models import CSGOWeapon
-from .Models import ApexProfile
-
-from .client import CSGOClient
-from .client import ApexClient
-
+import TrackerGG.Models
 from . import utils
+from .client import ApexClient
+from .client import CSGOClient
 
+__all__ = ["Models", "CSGOClient", "ApexClient", "utils"]
 
-count = 0
+__count = 0
 
 try:
     import aiohttp
-    count += 1
+
+    __count += 1
 except ImportError:
     pass
 
 try:
     import httpx
-    count += 1
+
+    __count += 1
 except ImportError:
     pass
 
-if count == 0:
-    raise ImportError("\nAt least one of aiohttp or httpx libraries is required\nTry `pip install aiohttp` or `pip install httpx`")
+if __count == 0:
+    raise ImportError(
+        "\nAt least one of aiohttp or httpx libraries is required\nTry `pip install aiohttp` or `pip install httpx`"
+    )

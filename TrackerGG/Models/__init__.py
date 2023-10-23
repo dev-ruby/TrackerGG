@@ -16,13 +16,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 
-from .csgo import CSGOProfile
-from .csgo import CSGOMapSegment
-from .csgo import CSGOQueryData
-from .csgo import CSGOWeaponSegment
-from .csgo import CSGOWeapon
+from . import Apex
+from . import CSGO
+from . import General
 
-from .apex import ApexProfile
-from .apex import ApexQueryData
-
-from .platform import Platform
+__all__ = ["CSGO", "General", "Apex"]

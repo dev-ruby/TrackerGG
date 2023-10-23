@@ -18,16 +18,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import asyncio
 import json
-from typing import List, Union, Optional
+from typing import *
 
-from .HTTPClients import *
-from .Models import ApexProfile
-from .Models import ApexQueryData
-from .Models import CSGOMapSegment
-from .Models import CSGOProfile
-from .Models import CSGOQueryData
-from .Models import CSGOWeaponSegment
-from .Models import Platform
+from TrackerGG.HTTPClients import *
+from TrackerGG.Models import *
+
+__all__ = ["CSGOClient", "ApexClient"]
 
 
 class TrackerClient:
@@ -64,7 +60,7 @@ class CSGOClient(TrackerClient):
     def __init__(self, api_key: str, http_client: Optional[HTTPClientLibrary] = None) -> None:
         super().__init__(api_key, http_client)
 
-    async def get_profile(self, identifier: str) -> CSGOProfile:
+    async def get_profile(self, identifier: str) -> CSGO.CSGOProfile:
         """
         Returns career stats for an CSGO player.
 
@@ -76,15 +72,13 @@ class CSGOClient(TrackerClient):
             Route(RequestMethod.GET, f"/csgo/standard/profile/steam/{identifier}")
         )
 
-        assert response.status == 200, (
-            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
-        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
 
         json_data: dict = json.loads(response.response_data)
 
-        return CSGOProfile(json_data["data"])
+        return CSGO.CSGOProfile(json_data["data"])
 
-    async def get_map_segment(self, identifier: str) -> List[CSGOMapSegment]:
+    async def get_map_segment(self, identifier: str) -> List[CSGO.CSGOMapSegment]:
         """
         Returns the stats of the map for a CSGO player.
 
@@ -99,20 +93,18 @@ class CSGOClient(TrackerClient):
             )
         )
 
-        assert response.status == 200, (
-            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
-        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
 
         json_data: dict = json.loads(response.response_data)
 
         segments = []
 
         for segment in json_data["data"]:
-            segments.append(CSGOMapSegment(segment))
+            segments.append(CSGO.CSGOMapSegment(segment))
 
         return segments
 
-    async def get_weapon_segment(self, identifier: str) -> List[CSGOWeaponSegment]:
+    async def get_weapon_segment(self, identifier: str) -> List[CSGO.CSGOWeaponSegment]:
         """
         Returns the stats of the weapon for a CSGO player.
 
@@ -127,20 +119,18 @@ class CSGOClient(TrackerClient):
             )
         )
 
-        assert response.status == 200, (
-            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
-        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
 
         json_data: dict = json.loads(response.response_data)
 
         segments = []
 
         for segment in json_data["data"]:
-            segments.append(CSGOWeaponSegment(segment))
+            segments.append(CSGO.CSGOWeaponSegment(segment))
 
         return segments
 
-    async def search_profile(self, query: str) -> Union[None, List[CSGOQueryData]]:
+    async def search_profile(self, query: str) -> Union[None, List[CSGO.CSGOQueryData]]:
         """
         Returns search data for a CSGO player using a unique identifier.
 
@@ -156,9 +146,7 @@ class CSGOClient(TrackerClient):
             )
         )
 
-        assert response.status == 200, (
-            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
-        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
 
         json_data: dict = json.loads(response.response_data)
 
@@ -167,7 +155,7 @@ class CSGOClient(TrackerClient):
         if json_data["data"]:
             query_data = []
             for dat in json_data["data"]:
-                query_data.append(CSGOQueryData(dat))
+                query_data.append(CSGO.CSGOQueryData(dat))
 
         return query_data
 
@@ -176,7 +164,7 @@ class ApexClient(TrackerClient):
     def __init__(self, api_key: str, http_client: Optional[HTTPClientLibrary] = None) -> None:
         super().__init__(api_key, http_client)
 
-    async def get_profile(self, identifier: str, platform: Platform) -> ApexProfile:
+    async def get_profile(self, identifier: str, platform: General.Platform) -> Apex.ApexProfile:
         """
         Returns career stats for an Apex player.
 
@@ -192,17 +180,13 @@ class ApexClient(TrackerClient):
             )
         )
 
-        assert response.status == 200, (
-            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
-        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
 
         json_data: dict = json.loads(response.response_data)
 
-        return ApexProfile(json_data["data"])
+        return Apex.ApexProfile(json_data["data"])
 
-    async def search_profile(
-        self, query: str, platform: Platform
-    ) -> Union[None, List[ApexQueryData]]:
+    async def search_profile(self, query: str, platform: General.Platform) -> Union[None, List[Apex.ApexQueryData]]:
         """
         Returns search data for an Apex player using a unique identifier.
 
@@ -219,9 +203,7 @@ class ApexClient(TrackerClient):
             )
         )
 
-        assert response.status == 200, (
-            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
-        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
 
         json_data: dict = json.loads(response.response_data)
 
@@ -230,6 +212,6 @@ class ApexClient(TrackerClient):
         if json_data["data"]:
             query_data = []
             for dat in json_data["data"]:
-                query_data.append(ApexQueryData(dat))
+                query_data.append(Apex.ApexQueryData(dat))
 
         return query_data

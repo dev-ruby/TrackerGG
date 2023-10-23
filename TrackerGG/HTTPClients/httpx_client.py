@@ -14,12 +14,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 import asyncio
-from typing import ClassVar, Optional, Union, Dict
+from typing import *
 
 import httpx
 
 from .abstract_http_client import AbstractHTTPClient
 from .httpclient import ResponseData, Route
+
+__all__ = ["HttpxHTTPClient"]
 
 
 class HttpxHTTPClient(AbstractHTTPClient):

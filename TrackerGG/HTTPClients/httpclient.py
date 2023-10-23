@@ -15,7 +15,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import asyncio
 from enum import Enum, auto
-from typing import ClassVar, Optional, Dict, Any
+from typing import *
+
+
+__all__ = ["HTTPClientLibrary", "get_http_client", "ResponseData", "Route", "RequestMethod", "MISSING"]
 
 
 class Missing:
@@ -30,9 +33,7 @@ class HTTPClientLibrary(Enum):
     HTTPX = auto()
 
 
-def get_http_client(
-    loop: asyncio.AbstractEventLoop, api_key: str, lib: Optional[HTTPClientLibrary] = None
-):
+def get_http_client(loop: asyncio.AbstractEventLoop, api_key: str, lib: Optional[HTTPClientLibrary] = None):
     if lib is None:
         try:
             import aiohttp
