@@ -16,30 +16,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 
-from enum import Enum
-from typing import Dict, Union, Any
+from typing import *
 
+from TrackerGG.Models.General import Platform
 
-class Platform(Enum):
-    steam = "steam"
-    origin = "origin"
-    xbl = "xbl"
-    psn = "psn"
-    uplay = "uplay"
-    battlenet = "battlenet"
+__all__ = ["PlatformInfo"]
 
 
 class PlatformInfo:
     def __init__(self, data: Dict[str, Union[str, int, None]]):
-        platforms = {
-            "steam": Platform.steam,
-            "origin": Platform.origin,
-            "xbl": Platform.xbl,
-            "psn": Platform.psn,
-            "uplay": Platform.uplay,
-        }
-
-        self.platform_slug: Platform = platforms[data["platformSlug"]]
+        self.platform_slug: Platform = Platform.from_name(data["platformSlug"])
         self.platform_user_id: Union[str, int] = data["platformUserId"]
         self.platform_user_handle: str = data["platformUserHandle"]
         self.platform_user_identifier: Union[str, int] = data["platformUserIdentifier"]

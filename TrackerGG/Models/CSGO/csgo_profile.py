@@ -2,7 +2,9 @@
 
 """
 Copyright (c) 2023 DevRuby
+
 MIT License
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -11,26 +13,24 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
+
 """
 
-from abc import *
 from typing import *
 
-from .httpclient import ResponseData, Route
+from TrackerGG.Models.General import PlatformInfo, UserInfo
+from .csgo_segment import CSGOSegment
 
-__all__ = ["AbstractHTTPClient"]
+__all__ = ["CSGOProfile"]
 
 
-class AbstractHTTPClient(metaclass=ABCMeta):
-    def __new__(cls, *args, **kwargs):
-        if not hasattr(cls, "_instance"):
-            cls._instance = super().__new__(cls)
-        return cls._instance
+class CSGOProfile:
+    def __init__(self, data: Dict[str, Any]):
+        segments = []
+        for seg in data["segments"]:
+            segments.append(CSGOSegment(seg))
 
-    @abstractmethod
-    def __init__(self):
-        pass
-
-    @abstractmethod
-    async def request(self, route: Route, headers: Optional[Dict[str, str]] = None) -> ResponseData:
-        pass
+        self.platform_info: PlatformInfo = PlatformInfo(data["platformInfo"])
+        self.user_info: UserInfo = UserInfo(data["userInfo"])
+        self.segments: List[CSGOSegment] = segments
+        self.expiry_date: str = data["expiryDate"]

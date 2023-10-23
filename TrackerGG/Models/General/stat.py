@@ -16,7 +16,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 
-from typing import Dict, Union, Any, Optional
+from typing import *
+
+__all__ = ["Stat"]
 
 
 class Stat:
@@ -33,6 +35,3 @@ class Stat:
         self.display_value: str = data["displayValue"]
         self.display_category: str = data["displayCategory"]
         self.display_type: str = data["displayType"]
-
-    def __str__(self):
-        return f"Name : {self.display_name}\nValue : {self.display_value}\nPercentile : {self.percentile}"

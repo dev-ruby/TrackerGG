@@ -16,15 +16,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 """
 
-from .Models import CSGOMapSegment
-from .Models import CSGOWeaponSegment
-from .Models import CSGOWeapon
-from typing import List, Union
+from typing import *
+
+from TrackerGG.Models import *
+
+__all__ = ["query_weapon", "query_map_by_key"]
 
 
-def query_map_by_key(
-    maps: List[CSGOMapSegment], key: str
-) -> Union[CSGOMapSegment, int]:
+def query_map_by_key(maps: List[CSGO.CSGOMapSegment], key: str) -> Union[CSGO.CSGOMapSegment, int]:
     """
     Returns a CSGOMapSegment that matches key.
     Returns -1 if there is no matching CSGOMapSegment Object.
@@ -39,9 +38,7 @@ def query_map_by_key(
     return -1
 
 
-def query_weapon(
-    weapons: List[CSGOWeaponSegment], key: CSGOWeapon
-) -> Union[CSGOWeaponSegment, int]:
+def query_weapon(weapons: List[CSGO.CSGOWeaponSegment], key: CSGO.CSGOWeapon) -> Union[CSGO.CSGOWeaponSegment, int]:
     """
     Returns a CSGO weapon segment that matches key.
     Returns -1 if there is no matching CSGOWeaponSegment Object.
