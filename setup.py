@@ -5,7 +5,7 @@ with open("README.md", "r") as fs:
 
 setuptools.setup(
     name="TrackerGG",
-    version="2.6.0",
+    version="2.7.0",
     author="DevRuby",
     author_email="hiveruby@gmail.com",
     description="TrackerGG API Wrapper Library",
@@ -17,6 +17,6 @@ setuptools.setup(
         "Programming Language :: Python",
         "License :: OSI Approved :: MIT License",
     ],
-    install_requires=["requests", "aiohttp"],
-    python_requires=">=3.3",
+    install_requires=["aiohttp"],
+    python_requires=">=3.7",
 )
